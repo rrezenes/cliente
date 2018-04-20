@@ -39,5 +39,24 @@ class UserTest extends TestCase
 			);
     }
 
+    public function testFindUser()
+    {
+
+    	$user = User::first();
+
+		$response = $this->get('api/users/'.$user->id);
+
+		$response
+			->assertStatus(200)
+			->assertJsonStructure(
+    			[
+    				'id',
+        			'name',
+        			'email',
+        			'active'
+				]
+			);
+    }
+
 
 }
