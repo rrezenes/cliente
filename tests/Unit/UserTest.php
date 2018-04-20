@@ -19,8 +19,8 @@ class UserTest extends TestCase
     {
 
 		$dados = [
-			'name' => 'Teste',
-			'email' => 'teste03@email.com',
+			'name' => 'Teste Novo',
+			'email' => 'teste_novo@email.com',
 			'password' => 'teste',
 			'active' => '1'
 		];
@@ -37,6 +37,14 @@ class UserTest extends TestCase
         			'active'
 				]
 			);
+
+		$this->assertDatabaseHas('users', 
+			[
+				'name' => $dados['name'],
+				'email' => $dados['email'],
+				'active' => $dados['active']
+			]
+		);
     }
 
     public function testFindUser()
@@ -56,7 +64,43 @@ class UserTest extends TestCase
         			'active'
 				]
 			);
+
     }
+
+    public function testUpdateUser()
+    {
+
+    	$user = User::first();
+
+		$dados = [
+			'name' => 'Teste Update',
+			'email' => 'teste_update@email.com',
+			'password' => 'update',
+			'active' => '1'
+		];
+
+		$response = $this->json('PUT', 'api/users/'.$user->id, $dados);
+
+		$response
+			->assertStatus(200)
+			->assertJsonStructure(
+    			[
+    				'id',
+        			'name',
+        			'email',
+        			'active'
+				]
+			);
+
+		$this->assertDatabaseHas('users', 
+			[
+				'name' => $dados['name'],
+				'email' => $dados['email'],
+				'active' => $dados['active']
+			]
+		);
+    }
+
 
 
 }
