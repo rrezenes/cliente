@@ -117,6 +117,22 @@ class UserTest extends TestCase
 		);
     }
 
+    public function testDeleteUser()
+    {
+    	$user = User::find(1);
 
+    	$response = $this->delete('api/users/'.$user->id);
+		$response
+			->assertStatus(200)
+			->assertJson(['message' => 'User successfully removed']);
+
+		$this->assertDatabaseMissing('users', 
+			[
+				'name' => $user->name,
+				'email' => $user->email,
+				'active' => $user->active
+			]
+		);
+    }
 
 }
