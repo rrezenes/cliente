@@ -15,6 +15,22 @@ class UserTest extends TestCase
 	//Faz todo o processo e depois da um rollback na base de dados
 	use DatabaseTransactions; 
 
+	public function testListAllUsers()
+	{
+		$response = $this->json('GET', 'api/users');
+
+		$response
+			->assertStatus(200)
+			->assertJsonStructure([
+    			'*' => [
+    				'id',
+        			'name',
+        			'email',
+        			'active'
+				]
+			]);
+	}
+
     public function testCreateUser()
     {
 
