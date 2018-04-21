@@ -63,6 +63,27 @@ class UserTest extends TestCase
 		);
     }
 
+    public function testCreateUserWithAlreadyUsedEmail()
+    {
+
+		$dados = [
+			'name' => 'Teste Novo',
+			'email' => 'teste_novo@email.com',
+			'password' => 'teste',
+			'active' => '1'
+		];
+
+		$this->json('POST', 'api/users', $dados); //insere a primeira vez
+
+		$response = $this->json('POST', 'api/users', $dados); //tenta inserir a segunda pra gerar o erro
+
+		echo $response->content();
+
+		$response
+			->assertStatus(422)
+			->assertJsonValidationErrors(['email']);
+    }
+
     public function testFindUser()
     {
 

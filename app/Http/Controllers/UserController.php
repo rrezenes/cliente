@@ -4,8 +4,10 @@ namespace cliente\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 use cliente\User;
+use cliente\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -27,7 +29,7 @@ class UserController extends Controller
     	return $user;
     }
 
-    public function saveUser(Request $request)
+    public function saveUser(UserRequest $request)
     {
 
         $user = new User;
@@ -41,7 +43,7 @@ class UserController extends Controller
         return $user;
     }
 
-    public function updateUser(Request $request, $id)
+    public function updateUser(UserRequest $request, $id)
     {
         //dd($request->all());
 
