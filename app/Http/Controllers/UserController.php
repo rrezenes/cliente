@@ -9,11 +9,22 @@ use Illuminate\Support\Facades\Validator;
 use cliente\User;
 use cliente\Http\Requests\UserRequest;
 
+use Cache;
+
 class UserController extends Controller
 {
     public function listUsers()
     {
-    	return User::all();
+
+        $expiration = 60;
+
+        return Cache::remember("users_", $expiration, function(){
+
+            return User::all();
+
+        });
+
+    	
     }
 
     public function findUser($id)
@@ -40,6 +51,8 @@ class UserController extends Controller
 
         $user->save();
 
+        Cache::forget('users_');
+
         return $user;
     }
 
@@ -64,6 +77,8 @@ class UserController extends Controller
 
         $user->save();
 
+        Cache::forget('users_');
+
         return $user;
         
     }
@@ -79,9 +94,13 @@ class UserController extends Controller
         }
 
     	if($user->delete()){
+            
+            Cache::forget('users_');
+
     		return response()->json([
                 'message'   => 'User successfully removed',
             ], 200);
     	}
+
     }
 }
