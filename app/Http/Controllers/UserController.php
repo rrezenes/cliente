@@ -24,20 +24,20 @@ class UserController extends Controller
 
         });
 
-    	
+        
     }
 
     public function findUser($id)
     {
-    	$user = User::find($id);
+        $user = User::find($id);
 
-    	if(!$user) {
+        if(!$user) {
             return response()->json([
                 'message'   => 'User not found',
             ], 404);
         }
 
-    	return $user;
+        return $user;
     }
 
     public function saveUser(UserRequest $request)
@@ -58,11 +58,10 @@ class UserController extends Controller
 
     public function updateUser(UserRequest $request, $id)
     {
-        //dd($request->all());
 
-    	$user = User::find($id);
+        $user = User::find($id);
 
-    	if(!$user) {
+        if(!$user) {
             return response()->json([
                 'message'   => 'User not found',
             ], 404);
@@ -72,7 +71,7 @@ class UserController extends Controller
 
         if($request->has('password'))
         {
-        	$user->encryptPassword();
+            $user->encryptPassword();
         }
 
         $user->save();
@@ -85,22 +84,21 @@ class UserController extends Controller
 
     public function deleteUser($id)
     {
-    	$user = User::find($id);
+        $user = User::find($id);
 
-    	if(!$user) {
+        if(!$user) {
             return response()->json([
                 'message'   => 'User not found',
             ], 404);
         }
 
-    	if($user->delete()){
-            
-            Cache::forget('users_');
+        Cache::forget('users_');
 
-    		return response()->json([
-                'message'   => 'User successfully removed',
-            ], 200);
-    	}
+        $user->delete();            
+
+        return response()->json([
+            'message'   => 'User successfully removed',
+        ], 200);
 
     }
 }

@@ -31,9 +31,4 @@ class UserRequest extends FormRequest
         ];
     }
 
-    public function response(array $errors) {
-
-        return Response::create($errors, 403);
-    }
-
 }

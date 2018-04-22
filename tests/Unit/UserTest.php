@@ -77,11 +77,49 @@ class UserTest extends TestCase
 
 		$response = $this->json('POST', 'api/users', $dados); //tenta inserir a segunda pra gerar o erro
 
-		echo $response->content();
-
 		$response
 			->assertStatus(422)
 			->assertJsonValidationErrors(['email']);
+    }
+    
+    public function testUserNotFoundOnFindUser()
+    {
+    	$idToNotFoundUser = -1;
+
+		$response = $this->get('api/users/'.$idToNotFoundUser);
+
+		$response
+			->assertStatus(404)
+			->assertJson(['message' => 'User not found']);
+    }
+    
+    public function testUserNotFoundOnUpdateUser()
+    {
+    	$idToNotFoundUser = -1;
+
+		$dados = [
+			'name' => 'Teste Update',
+			'email' => 'teste_update@email.com',
+			'password' => 'update',
+			'active' => '1'
+		];
+
+		$response = $this->json('PUT', 'api/users/'.$idToNotFoundUser, $dados);
+
+		$response
+			->assertStatus(404)
+			->assertJson(['message' => 'User not found']);
+    }
+    
+    public function testUserNotFoundOnDeleteUser()
+    {
+    	$idToNotFoundUser = -1;
+
+		$response = $this->delete('api/users/'.$idToNotFoundUser);
+
+		$response
+			->assertStatus(404)
+			->assertJson(['message' => 'User not found']);
     }
 
     public function testFindUser()
@@ -155,5 +193,4 @@ class UserTest extends TestCase
 			]
 		);
     }
-
 }
