@@ -1,6 +1,6 @@
 # Api em Php com Laravel utilizando padrão REST, JSON
 
-## Passos rodar o api:
+## Passos rodar a api:
 1º Clone a configuração do docker server: 
 `git clone https://github.com/rrezenes/docker-server-cliente.git`
 
