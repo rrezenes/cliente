@@ -13,17 +13,18 @@
 4. Rode o script, para configurar a aplicação:*
 `bash setup.sh`
 
-##### * *Caso não rode a o script utilize os seguintes comandos no terminal:*
 
-Gerar o arquivo .env: `docker exec -it php_7 cp .env.example .env`
+### * *Caso não rode a o script utilize os seguintes comandos no terminal:*
 
-Baixar as dependencias do projeto: `docker exec -it php_7 composer install`
+*Gerar o arquivo .env:<br /> `docker exec -it php_7 cp .env.example .env`*
 
-Gerar uma nova app key: `docker exec -it php_7 php artisan key:generate`
+*Baixar as dependencias do projeto:<br /> `docker exec -it php_7 composer install`*
 
-Criar a tabelas usuario: `docker exec -it php_7 php artisan migrate`
+*Gerar uma nova app key:<br /> `docker exec -it php_7 php artisan key:generate`*
 
-Popular a base de dados: `docker exec -it php_7 php artisan db:seed`
+*Criar a tabelas usuario:<br /> `docker exec -it php_7 php artisan migrate`*
+
+*Popular a base de dados:<br /> `docker exec -it php_7 php artisan db:seed`*
 
 Nesta etapa o Servidor se encontra configurado e rodando. Basta acessar http://localhost:8080/api/users
 
