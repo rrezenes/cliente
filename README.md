@@ -27,11 +27,14 @@ PUT `/api/users/{id}`   - Edita Usuário em específico
 
 DELETE `/api/users/{id}`- Deleta Usuário em específico
 
-##### Parametros do usuario:
-'name' => 'required|min:3|max:255',
+#### Parametros do usuario:
+`'name' => 'required|min:3|max:255',
+
 'email' => 'unique:users|required|max:255',
+
 'password' => 'required|max:255',
-'active' => 'boolean'
+
+'active' => 'boolean'`
 
 ### Testes Unitarios
 Para rodar os testes unitarios no container, execute o seguinte comando:
