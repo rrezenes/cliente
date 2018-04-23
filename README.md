@@ -1,17 +1,29 @@
 # Api em Php com Laravel utilizando padrão REST, JSON
 
 ## Passos rodar a api:
-1º Clone a configuração do docker server: 
+1. Clone a configuração do docker server: 
 `git clone https://github.com/rrezenes/docker-server-cliente.git`
 
-2º Entre na pasta que foi gerada(cd docker-server-cliente) e clone o projeto dentro da pasta:
+2. Entre na pasta que foi gerada(cd docker-server-cliente) e clone o projeto dentro da pasta:
 `git clone https://github.com/rrezenes/cliente.git`
 
-3º Suba a aplicação com docker-compose:
+3. Suba a aplicação com docker-compose:
 `docker-compose up -d --build`
 
-4º Rode o script, para configurar a aplicação:
+4. Rode o script, para configurar a aplicação:*
 `bash setup.sh`
+
+##### * *Caso não rode a o script utilize os seguintes comandos no terminal:*
+
+Gerar o arquivo .env: `docker exec -it php_7 cp .env.example .env`
+
+Baixar as dependencias do projeto: `docker exec -it php_7 composer install`
+
+Gerar uma nova app key: `docker exec -it php_7 php artisan key:generate`
+
+Criar a tabelas usuario: `docker exec -it php_7 php artisan migrate`
+
+Popular a base de dados: `docker exec -it php_7 php artisan db:seed`
 
 Nesta etapa o Servidor se encontra configurado e rodando. Basta acessar http://localhost:8080/api/users
 
