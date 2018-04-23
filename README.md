@@ -41,5 +41,5 @@ DELETE `/api/users/{id}`- Deleta Usuário em específico
 Para rodar os testes unitarios no container, execute o seguinte comando:
 `docker exec -it php_7 vendor/bin/phpunit`
 
-Após rodar os testes unitarios podemos então, conferir o 'Coverage Reports' abra o arquivo html que se encontra na seguinte pasta do projeto:
+Após rodar os testes unitarios podemos então, conferir o 'Coverage Reports' abra o arquivo html que se encontra na seguinte pasta RAIZ do projeto:
 `/docker-server-cliente/cliente/report/indext.html`
